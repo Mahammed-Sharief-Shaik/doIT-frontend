@@ -87,62 +87,80 @@ import axios from "../../utils/axiosInstance.js";
 const COLORS = ["#FFB200", "#00A9F4"];
 
 function Analytics() {
-  const { tasks, setTotalTasks } = useContext(GlobalContext);
+    const { tasks, setTotalTasks } = useContext(GlobalContext);
 
-  const done = tasks.filter((t) => t.isCompleted).length;
-  const pending = tasks.length - done;
+    const done = tasks.filter((t) => t.isCompleted).length;
+    const pending = tasks.length - done;
 
-  useEffect(() => {
-    const fetchTotalTasks = async () => {
-      try {
-        const res = await axios.get(
-          `/api/${localStorage.getItem("user")}/total`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        setTotalTasks(res.data.total);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    fetchTotalTasks();
-  }, []);
-
-  const data = [
-    { name: "Done", value: done },
-    { name: "yet to doIT", value: pending },
-  ];
-
-  return (
-    <div className="w-full h-[400px] md:w-2/3 mx-auto bg-[#101828] p-4 rounded-xl shadow-lg">
-      <h2 className="text-white text-xl font-semibold text-center mb-4">Task Analytics</h2>
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius={70}
-            outerRadius={100}
-            fill="#8884d8"
-            paddingAngle={3}
-            dataKey="value"
-            label={({ name, percent }) =>
-              `${name}: ${(percent * 100).toFixed(0)}%`
+    useEffect(() => {
+        const fetchTotalTasks = async () => {
+            try {
+                const res = await axios.get(
+                    `/api/${localStorage.getItem("user")}/total`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                    }
+                );
+                setTotalTasks(res.data.total);
+            } catch (e) {
+                console.log(e);
             }
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Legend verticalAlign="bottom" iconSize={10} wrapperStyle={{ color: "white" }} />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
-  );
+        };
+        fetchTotalTasks();
+    }, []);
+
+    const data = [
+        { name: "Done", value: done },
+        { name: "yet to doIT", value: pending },
+    ];
+
+    return (
+        <div className="w-full  bg-[#101828]  rounded-xl">
+            <h2 className="text-white text-xl font-semibold text-center mb-4">
+                Task Analytics
+            </h2>
+
+            <style>
+                {`
+        .recharts-pie-label-text {
+          font-size: 10px;
+          fill: aqua;
+        }
+      `}
+            </style>
+
+            <div className="w-full h-[300px]">
+                <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                        <Pie
+                            data={data}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={70}
+                            outerRadius={100}
+                            fill="#8884d8"
+                            paddingAngle={3}
+                            dataKey="value"
+                            // label={({ name, percent }) =>
+                            //     `${name}: ${(percent * 100).toFixed(0)}%`
+                            // }
+                            label={({ name, value }) =>
+                                `${name}: ${value}`
+                            }
+                        >
+                            {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+                        <Legend verticalAlign="bottom" iconSize={10} wrapperStyle={{ color: "white" }} />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
+        </div>
+
+    );
 }
 
 export default Analytics;
