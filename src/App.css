@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Truculenta:opsz,wght@12..72,100..900&display=swap');
+@import "tailwindcss";
+
+
+* {
+  font-family: "Truculenta", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.rubik-font {
+  font-family: "Rubik Iso", system-ui;
+}
+
+
+
+@theme {
+  --color-bg: #1E1E1E;
+  --color-spark-yellow: #FFB200;
+  --color-aqua-blue: #00A9F4;
+  --color-text1: #F0F0F0;
+  --color-text2: #A0A0A0;
+  --color-alert-red: #FF6347;
+}
+
+.flex-center {
+  @apply flex justify-center items-center;
+}
+
+.subtle-shadow {
+  @apply shadow-sm shadow-text1;
+}
+
+
+@keyframes scroll-X {
+  0% {
+    transform: translateX(0%)
+  }
+
+
+  100% {
+    transform: translateX(-100%)
+  }
+}
+
+.scrollX {
+  animation: scroll-X  15s linear infinite;
+}
+
+.authForm > div{
+  @apply  flex justify-center items-center gap-5;
+}
+
+.authForm > div > input{
+  @apply w-4/5 shadow-sm shadow-text1 text-center rounded-md;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeInFromLeft {
+  0%{
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-left{
+  animation: fadeInFromLeft 0.5s ease-in-out;
+}
