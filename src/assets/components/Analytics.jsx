@@ -119,7 +119,7 @@ function Analytics() {
   return (
     <div className="w-full h-[400px] md:w-2/3 mx-auto bg-[#101828] p-4 rounded-xl shadow-lg">
       <h2 className="text-white text-xl font-semibold text-center mb-4">Task Analytics</h2>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer >
         <PieChart>
           <Pie
             data={data}
