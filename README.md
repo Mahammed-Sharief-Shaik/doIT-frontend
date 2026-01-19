@@ -8,7 +8,7 @@ Stay focused. Be productive. Track your tasks and get things done with doIT – 
 ## 🚀 Live Demo
 
 Frontend: [doIT on Vercel](https://do-it-frontend-three.vercel.app/)  
-Backend: [doIT API on Render](https://doit-server.onrender.com)
+Backend: [doIT API on Render](https://doit-backend-1.onrender.com/)
 
 ---
 
@@ -47,3 +47,4 @@ Backend: [doIT API on Render](https://doit-server.onrender.com)
 │   ├── routes/
 │   └── controllers/
 └── README.md
+
